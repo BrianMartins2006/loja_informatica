@@ -32,7 +32,7 @@ public final class DAOFactory {
 		return new MySQLCategoryDAO();
 	}
 	
-	public static ProductDAO createProductyDAO() {
+	public static ProductDAO createProductDAO() {
 		return new MySQLProductDAO();
 	}
 }

@@ -10,5 +10,5 @@ public interface ProductDAO {
 	void update(Product product) throws ModelException;
 	void delete(Product product) throws ModelException;
 	List<Product> findAll() throws ModelException;
-	List<Product> findByUserId(int categoryId) throws ModelException;
+	List<Product> findByCategoryId(int categoryId) throws ModelException;
 }
