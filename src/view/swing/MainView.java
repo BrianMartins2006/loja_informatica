@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import view.swing.category.CategoryListView;
 import view.swing.post.PostListView;
+import view.swing.product.ProductListView;
 import view.swing.user.UserListView;
 
 public class MainView extends JFrame {
@@ -47,6 +48,12 @@ public class MainView extends JFrame {
         categoryListItem.addActionListener(e -> new CategoryListView(this).setVisible(true));
         categoryMenu.add(categoryListItem);
         menuBar.add(categoryMenu);
+        
+        JMenu productMenu = new JMenu("Produto");
+        JMenuItem productListItem = new JMenuItem("Listar Produto");
+        productListItem.addActionListener(e -> new ProductListView(this).setVisible(true));
+        productMenu.add(productListItem);
+        menuBar.add(productMenu);
 
         // Adiciona um menu vazio para empurrar o próximo menu para a direita
         menuBar.add(Box.createHorizontalGlue());
