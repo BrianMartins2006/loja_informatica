@@ -40,7 +40,7 @@ public class MySQLCategoryDAO implements CategoryDAO{
 			throw me;
 		} 
 		finally {
-			DAOUtils.close(preparedStatement);
+			DAOUtils.close(preparedStatement); 
 			DAOUtils.close(connection);
 		}
 		

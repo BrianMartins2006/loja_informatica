@@ -1,43 +1,19 @@
 package view;
 
-import java.util.List;
-
-import model.Post;
-import model.User;
-import model.data.CategoryDAO;
-import model.data.DAOFactory;
-import model.data.PostDAO;
-import model.data.UserDAO;
+import Util.SenhaUtil;
 
 public class Main {
 
 	public static void main(String[] args) 
 			throws Exception {
 		
-		PostDAO postDAO = DAOFactory.createPostDAO();
-		UserDAO userDAO = DAOFactory.createUserDAO();
-		CategoryDAO categoryDAO = DAOFactory.createCategoryDAO();
-		
-		// Listagem de posts
-		List<Post> posts = postDAO.findAll();
-		for(Post p : posts) {
-			System.out.println("Post: " + p.getContent() 
-				+ " User: " + p.getUser().getName());
-			
-		}
-		
-		// Listagem de usuários
-		List<User> users = userDAO.findAll();
-		for(User user : users) {
-			System.out.println("Usuário: "+ user.getName());
-			
-			if (user.getPosts().size() > 0) {
-				System.out.println("Posts");
-			
-				for (Post p : user.getPosts()) {
-					System.out.println(p.getContent());
-				}
-			}
-		}
+			String senha = "minhaSenha123"; 
+	        String hash = SenhaUtil.generateHash(senha);
+
+	        System.out.println("Senha original: " + senha);
+	        System.out.println("Hash gerado: " + hash);
+
+	        System.out.println("Verificação (correta): " + SenhaUtil.verifyPassword("minhaSenha123", hash));
+	        System.out.println("Verificação (errada): " + SenhaUtil.verifyPassword("outraSenha", hash));
 	}
 }

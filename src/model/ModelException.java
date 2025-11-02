@@ -12,3 +12,4 @@ public class ModelException extends Exception {
 		super(message, cause);
 	}
 }
+ 

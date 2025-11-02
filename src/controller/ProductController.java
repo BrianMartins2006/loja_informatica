@@ -26,12 +26,12 @@ public class ProductController {
 	    }
 
 	    // Salvar ou atualizar
-	    public void saveOrUpdate(boolean isNew) {
+	    public void saveOrUpdate(boolean isNew) { 
 	        Product product = productFormView.getProductFromForm();
 	        if (product == null) {
 	            productFormView.showErrorMessage("Produto não pode ser nulo!");
 	            return;
-	        }
+	        } 
 
 	        try {
 	            product.validate();

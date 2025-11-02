@@ -36,7 +36,7 @@ public class CategoryController {
         }
 
         try {
-            if (isNew) {
+            if (isNew) { 
                 categoryDAO.save(category);
             } else {
                 categoryDAO.update(category);

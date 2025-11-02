@@ -1,15 +1,30 @@
 package view.swing;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import controller.AuthController;
+import model.ModelException;
+import model.User; 
 
 public class LoginView extends JDialog {
     private boolean authenticated = false;
     private final JTextField emailField = new JTextField(20);
     private final JPasswordField passwordField = new JPasswordField(20);
+    private final AuthController authController = new AuthController();
 
     public LoginView() {
-        setTitle("Facebook CRUD - Login");
+        setTitle("LOJA - Login");
         setModal(true);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -30,23 +45,29 @@ public class LoginView extends JDialog {
         JPanel buttons = new JPanel();
         JButton loginBtn = new JButton("Entrar");
         JButton cancelBtn = new JButton("Cancelar");
+        JButton registerBtn = new JButton("Cadastrar");
+        JButton forgotpasswordBtn = new JButton("Esqueci senha");
         buttons.add(loginBtn);
+        buttons.add(registerBtn);
+        buttons.add(forgotpasswordBtn);
         buttons.add(cancelBtn);
-
-        loginBtn.addActionListener(e -> {
-            String email = emailField.getText();
-            String senha = new String(passwordField.getPassword());
-            if ("eac".equals(email) && "123".equals(senha)) {
-                authenticated = true;
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Email ou senha inválidos.", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+        
+      
+        loginBtn.addActionListener(e -> performLogin());
 
         cancelBtn.addActionListener(e -> {
             authenticated = false;
             dispose();
+        });
+        
+        registerBtn.addActionListener(e -> {
+            RegisterView registerView = new RegisterView();
+            registerView.setVisible(true);
+        });
+
+        forgotpasswordBtn.addActionListener(e -> {
+            ForgotPasswordView forgotView = new ForgotPasswordView(this);  
+            forgotView.setVisible(true);
         });
 
         add(form, BorderLayout.CENTER);
@@ -55,8 +76,32 @@ public class LoginView extends JDialog {
         setLocationRelativeTo(null);
     }
 
+  
+    private void performLogin() {
+        String email = emailField.getText();
+        String senhaDigitada = new String(passwordField.getPassword());
+        
+        if (email.isEmpty() || senhaDigitada.isEmpty()) {
+             JOptionPane.showMessageDialog(this, "Preencha todos os campos.", "Erro", JOptionPane.WARNING_MESSAGE);
+             return;
+        } 
+        
+        try {
+            User user = authController.authenticate(email, senhaDigitada);
+
+            if (user != null) {
+                authenticated = true;
+                JOptionPane.showMessageDialog(this, "Login bem-sucedido!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Email ou senha inválidos.", "Erro de Login", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (ModelException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao acessar dados de autenticação: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public boolean isAuthenticated() {
         return authenticated;
     }
 }
-

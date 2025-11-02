@@ -40,7 +40,7 @@ public class MySQLProductDAO implements ProductDAO {
 
 		} catch (SQLException sqle) {
 			DAOUtils.sqlExceptionTreatement("Erro ao inserir produto do BD.", sqle);
-		} catch (ModelException me) {
+		} catch (ModelException me) { 
 			throw me;
 		} 
 		finally {

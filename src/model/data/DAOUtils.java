@@ -31,6 +31,6 @@ public final class DAOUtils {
 			} catch (Exception e) {
 				throw new ModelException(
 						"Erro ao fechar o recurso " + resource);
-			}
+			} 
 	}
 }

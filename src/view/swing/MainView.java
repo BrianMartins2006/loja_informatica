@@ -15,9 +15,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import view.swing.category.CategoryListView;
-import view.swing.post.PostListView;
 import view.swing.product.ProductListView;
-import view.swing.user.UserListView;
 
 public class MainView extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -28,21 +26,6 @@ public class MainView extends JFrame {
         setLocationRelativeTo(null);
 
         JMenuBar menuBar = new JMenuBar();
-
-        // Menu Usuários
-        JMenu menu = new JMenu("Usuários");
-        JMenuItem userListItem = new JMenuItem("Listar Usuários");
-        userListItem.addActionListener(e -> new UserListView(this).setVisible(true));
-        menu.add(userListItem);
-        menuBar.add(menu);
-
-        // Menu Posts
-        JMenu postMenu = new JMenu("Posts");
-        JMenuItem postListItem = new JMenuItem("Listar Posts");
-        postListItem.addActionListener(e -> new PostListView(this).setVisible(true));
-        postMenu.add(postListItem);
-        menuBar.add(postMenu);
-        
         JMenu categoryMenu = new JMenu("Categoria");
         JMenuItem categoryListItem = new JMenuItem("Listar Categoria");
         categoryListItem.addActionListener(e -> new CategoryListView(this).setVisible(true));
@@ -67,7 +50,7 @@ public class MainView extends JFrame {
 
         setJMenuBar(menuBar);
 
-        JLabel label = new JLabel("Sai fora do meu sistema 🖕 !!!", SwingConstants.CENTER);
+        JLabel label = new JLabel("Seja bem vindo a nossa loja de informatica", SwingConstants.CENTER);
 
         // Painel com padding
         JPanel contentPanel = new JPanel(new BorderLayout());
@@ -85,7 +68,7 @@ public class MainView extends JFrame {
         }
 
         // Tela de login antes da tela principal
-        SwingUtilities.invokeLater(() -> {
+        SwingUtilities.invokeLater(() -> { 
             LoginView login = new LoginView();
             login.setVisible(true);
             if (login.isAuthenticated()) {

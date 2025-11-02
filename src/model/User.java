@@ -1,33 +1,33 @@
 package model;
 
-import java.util.List;
-
 public class User {
 	private int id;
-	private String name;
-	private UserGender gender;
 	private String email;
-	private List<Post> posts;
+	private String passwordHash;
+	private String securityquestion;
+	private String responseHash;
+
 	
 	public User(int id) {
 		this.id = id;
 	}
-
-	public String getName() {
-		return name;
+	
+	public User(int id,String email, String passwordHash, String securityquestion, String responseHash) {
+		this.id = id;
+		this.email = email;
+		this.passwordHash = passwordHash;
+		this.securityquestion = securityquestion;
+		this.responseHash = responseHash;
+	}
+	
+	public int getId() {
+		return id;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public UserGender getGender() {
-		return gender;
-	}
-
-	public void setGender(UserGender gender) {
-		this.gender = gender;
-	}
 
 	public String getEmail() {
 		return email;
@@ -37,34 +37,49 @@ public class User {
 		this.email = email;
 	}
 
-	public List<Post> getPosts() {
-		return posts;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
 
-	public int getId() {
-		return id;
+	public String getSecurityquestion() {
+		return securityquestion;
+	}
+
+	public void setSecurityquestion(String securityquestion) {
+		this.securityquestion = securityquestion;
+	}
+
+	public String getResponseHash() {
+		return responseHash;
+	}
+
+	public void setResponseHash(String responseHash) {
+		this.responseHash = responseHash;
 	}
 	
+
 	public void validate() {
-		if (name == null || name.isBlank()) {
-			throw new IllegalArgumentException("O nome do usuário não pode ser vazio.");
-		}
-		
-		if (gender == null) {
-			throw new IllegalArgumentException("O sexo do usuário é inválido.");
-		}
 		
 		if (email == null || email.isBlank() || !email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")) {
 			throw new IllegalArgumentException("O email do usuário é inválido.");
 		}	
+        
+		if (securityquestion == null || securityquestion.isBlank()) {
+	        throw new IllegalArgumentException("A pergunta de segurança não pode ser vazia");
+	    }
+		
+		if (responseHash == null || responseHash.isBlank()) {
+	        throw new IllegalArgumentException("A resposta não pode ser vazia.");
+	    }
+		
+		if (passwordHash == null || passwordHash.isBlank()) {
+	        throw new IllegalArgumentException("A senha não pode ser vazia.");
+	    }
+		
 	}
 
-	@Override
-	public String toString() {
-		return name;
-	}
 }
