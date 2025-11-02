@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) 
 			throws Exception {
 		
-			String senha = "minhaSenha123"; 
+			String senha = "admn123"; 
 	        String hash = SenhaUtil.generateHash(senha);
 
 	        System.out.println("Senha original: " + senha);
